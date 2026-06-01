@@ -10,6 +10,26 @@
     {
       "source": "/guides/**",
       "destination": "/custodians/**"
+    },
+    {
+      "source": "/payments/wallet-implementation",
+      "destination": "https://docs.walletconnect.com/payments/wallets/overview"
+    },
+    {
+      "source": "/payments/overview",
+      "destination": "https://docs.walletconnect.com/payments/overview"
+    },
+    {
+      "source": "/payments/",
+      "destination": "https://docs.walletconnect.com/"
+    },
+    {
+      "source": "/token-dynamics/fees",
+      "destination": "/token-dynamics/intro"
+    },
+    {
+      "source": "/token-dynamics/wallet-rewards",
+      "destination": "/token-dynamics/rewards"
     }
   ],
   "integrations": {
@@ -38,7 +58,7 @@
                 "pages": ["wallet-sdk/features/verify", "wallet-sdk/features/link-mode", "wallet-sdk/features/one-click-auth"]
               },
               {
-                                "group": "Chain Support",
+              "group": "Chain Support",
                                 "pages": [
                                   "wallet-sdk/chain-support/overview",
                                   "wallet-sdk/chain-support/evm",
@@ -47,7 +67,9 @@
                                   "wallet-sdk/chain-support/sui",
                                   "wallet-sdk/chain-support/stacks",
                                   "wallet-sdk/chain-support/ton",
-                                  "wallet-sdk/chain-support/tron"
+                                  "wallet-sdk/chain-support/tron",
+                                  "wallet-sdk/chain-support/adi",
+                                  "wallet-sdk/chain-support/canton"
                                 ]
               },
               {
@@ -247,7 +269,7 @@
           },
           {
             "group": "Guides",
-            "pages": ["guides/app-extended-sessions"]
+            "pages": ["guides/app-extended-sessions", "guides/tonconnect-walletconnect"]
           }
         ]
       },
@@ -263,10 +285,8 @@
             "group": "WCT Token",
             "pages": [
               "token-dynamics/intro",
-              "token-dynamics/fees",
               "token-dynamics/rewards",
-              "token-dynamics/service-node-rewards",
-              "token-dynamics/wallet-rewards"
+              "token-dynamics/service-node-rewards"
             ]
           },
           {
@@ -282,24 +302,6 @@
             "pages": ["contracts"]
           }
         ]
-      },
-      {
-        "tab": "Payments",
-        "icon": "credit-card",
-        "groups": [
-          {
-            "group": "Introduction",
-            "pages": ["payments/overview"]
-          },
-          {
-            "group": "Point of Sale (POS) SDK",
-            "pages": [
-              "payments/point-of-sale",
-              "payments/flutter/installation",
-              "payments/kotlin/installation"
-            ]
-          }
-        ]
       }
     ],
     "global": {
@@ -310,11 +312,6 @@
           "icon": "globe"
         },
         {
-          "anchor": "Community",
-          "href": "https://discord.walletconnect.network/",
-          "icon": "discord"
-        },
-        {
           "anchor": "Blog",
           "href": "https://walletconnect.network/blog",
           "icon": "newspaper"
@@ -323,6 +320,11 @@
           "anchor": "Whitepaper",
           "href": "https://whitepaper.walletconnect.network/",
           "icon": "book"
+        },
+        {
+          "anchor": "WalletConnect Specs",
+          "href": "https://specs.walletconnect.com/",
+          "icon": "code"
         }
       ]
     }

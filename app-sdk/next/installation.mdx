@@ -17,6 +17,21 @@ Create a new project on WalletConnect Dashboard at https://dashboard.walletconne
 
 <CloudBanner />
 
+### Allowlist
+
+To help prevent malicious use of your project ID, you are strongly encouraged to set an allowlist of [origins](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin) where your project ID is used. You can manage your allowlist in the [WalletConnect Dashboard](https://dashboard.walletconnect.com) under the project settings.
+
+The allowlist supports a list of origins in the format `[scheme://]<hostname[:port]>`. Using `localhost` (or `127.0.0.1`) is always permitted, and if the allowlist is empty, all origins are allowed. Updates take 15 minutes to apply.
+
+Examples of possible origins in the allowlist:
+- `example.com` - allows `https://example.com` or `http://example.com` but not `https://www.example.com`
+- `https://example.com` - allows `https://example.com` but not `http://example.com`
+- `https://*.example.com` - allows `https://www.example.com` but not `https://example.com`
+
+<Warning>
+Requests from origins not in the allowlist will be denied. Make sure to add all domains where your app will be deployed.
+</Warning>
+
 ## Installation
 <CodeGroup>
 
@@ -181,6 +196,52 @@ export async function getUniversalConnector() {
         chains: [tonMainnet as CustomCaipNetwork],
         events: [],
         namespace: 'ton'
+      }
+    ]
+  })
+
+  return universalConnector
+}
+```
+
+```tsx TRON Example
+import type { AppKitNetwork } from '@reown/appkit/networks'
+import type { CustomCaipNetwork } from '@reown/appkit-common'
+import { UniversalConnector } from '@reown/appkit-universal-connector'
+
+// Get projectId from https://dashboard.walletconnect.com
+export const projectId = import.meta.env.VITE_PROJECT_ID || "YOUR_PROJECT_ID_HERE" // Replace with your actual project ID
+
+if (!projectId || projectId === "YOUR_PROJECT_ID_HERE") {
+  throw new Error('Project ID is not defined. Please set your project ID from the WalletConnect Dashboard.')
+}
+
+const tronMainnet: CustomCaipNetwork<'tron'> = {
+  id: '0x2b6653dc',
+  chainNamespace: 'tron' as const,
+  caipNetworkId: 'tron:0x2b6653dc',
+  name: 'Tron Mainnet',
+  nativeCurrency: { name: 'TRX', symbol: 'TRX', decimals: 6 },
+  rpcUrls: { default: { http: ['https://api.trongrid.io'] } }
+}
+
+export const networks = [tronMainnet] as [AppKitNetwork, ...AppKitNetwork[]]
+
+export async function getUniversalConnector() {
+  const universalConnector = await UniversalConnector.init({
+    projectId,
+    metadata: {
+      name: 'Universal Connector',
+      description: 'Universal Connector',
+      url: 'https://www.walletconnect.com',
+      icons: ['https://www.walletconnect.com/icon.png']
+    },
+    networks: [
+      {
+        methods: ['tron_signTransaction', 'tron_signMessage'],
+        chains: [tronMainnet as CustomCaipNetwork],
+        events: [],
+        namespace: 'tron'
       }
     ]
   })
